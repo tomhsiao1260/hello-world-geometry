@@ -1,3 +1,3 @@
 import numpy as np
 
-print('Hello VC World!')
+print('Hello 3D World!')

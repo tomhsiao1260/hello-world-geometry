@@ -1,6 +1,6 @@
 ## Introduction
 
-A series guide from the bottom up for [Vesuvius Challenge](https://scrollprize.org/)
+A series guide for the 3D geometry stuff.
 
 ## Setup
 
