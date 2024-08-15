@@ -1,3 +1,5 @@
 import numpy as np
+import open3d as o3d
 
-print('Hello 3D World!')
+if __name__ == "__main__":
+  print('Hello Geometry World!')
