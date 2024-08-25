@@ -61,31 +61,29 @@ def rotate(mesh, theta=0, axis='x'):
 
   mesh.vertices = o3d.utility.Vector3dVector(vertices)
 
-# update normals
-def compute_normals(mesh):
-  if not mesh.triangle_normals:
-    mesh.compute_vertex_normals()
-    mesh.triangle_normals = o3d.utility.Vector3dVector([])
-  else:
-    mesh.compute_vertex_normals()
-    mesh.compute_triangle_normals()
-
 if __name__ == "__main__":
-  meshA = load_obj("../lesson1/6-cube.obj", "../lesson1/grass.png")
+  # meshA = load_obj("../lesson1/6-cube.obj", "../lesson1/grass.png")
+  meshA = load_obj("../lesson1/3-quad.obj", "../lesson1/grass.png")
   meshB = copy.deepcopy(meshA)
 
-  translate(meshA, [ 1, 0, 0])
-  translate(meshB, [-1, 0, 0])
+  # rotate(mesh, np.pi/4, 'x')
+  # mesh.compute_triangle_normals()
+  # meshB.compute_triangle_normals()
+  # rotate(meshA, np.pi/4, 'x')
 
-  scale(meshB, [0.5, 0.5, 0.5])
-  scale(meshB, [1.5, 1.5, 1.5])
+  print(np.asarray(meshA.triangle_normals))
+  print(np.asarray(meshA.vertex_normals))
 
-  rotate(meshA, np.pi/4, 'x')
-  rotate(meshB, np.pi/4, 'z')
+  if not meshA.triangle_normals: print('wefjiefjiewj')
 
-  mesh = combine(meshA, meshB)
-  compute_normals(mesh)
+  # meshA.compute_triangle_normals()
+  meshA.compute_vertex_normals()
+
+  print(np.asarray(meshA.triangle_normals))
+  print(np.asarray(meshA.vertex_normals))
+
+  meshA.triangle_normals = o3d.utility.Vector3dVector([])
 
   # save obj
-  o3d.io.write_triangle_mesh("./output/output.obj", mesh)
+  o3d.io.write_triangle_mesh("./output/output.obj", meshA)
 
