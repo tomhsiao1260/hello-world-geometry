@@ -12,9 +12,6 @@ def load_obj(path, texture_path=None):
 
   return mesh
 
-# merge 2 meshes into 1
-def combine(meshA, meshB): return meshA + meshB
-
 # move the mesh along a given direction
 def translate(mesh, shift=[0, 0, 0]):
   vertices = np.asarray(mesh.vertices)
@@ -61,6 +58,21 @@ def rotate(mesh, theta=0, axis='x'):
 
   mesh.vertices = o3d.utility.Vector3dVector(vertices)
 
+# merge 2 meshes into 1
+def combine(meshA, meshB, share_texture=False):
+  mesh = meshA + meshB
+
+  if share_texture:
+    # share textures
+    mesh.textures = meshA.textures
+    # share material ids
+    ids = meshA.triangle_material_ids
+    ids = np.repeat(np.asarray(ids), 2)
+    ids = o3d.utility.IntVector(ids)
+    mesh.triangle_material_ids = ids
+
+  return mesh
+
 # update normals
 def compute_normals(mesh):
   if not mesh.triangle_normals:
@@ -83,7 +95,7 @@ if __name__ == "__main__":
   rotate(meshA, np.pi/4, 'x')
   rotate(meshB, np.pi/4, 'z')
 
-  mesh = combine(meshA, meshB)
+  mesh = combine(meshA, meshB, True)
   compute_normals(mesh)
 
   # save obj
