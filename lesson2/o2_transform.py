@@ -83,7 +83,7 @@ def compute_normals(mesh):
     mesh.compute_triangle_normals()
 
 if __name__ == "__main__":
-  meshA = load_obj("../lesson1/6-cube.obj", "../lesson1/grass.png")
+  meshA = load_obj("../lesson1/6_cube.obj", "../lesson1/grass.png")
   meshB = copy.deepcopy(meshA)
 
   translate(meshA, [ 1, 0, 0])

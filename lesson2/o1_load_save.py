@@ -22,12 +22,12 @@ def load_obj(path, texture_path=None):
   return mesh
 
 if __name__ == "__main__":
-  mesh = load_obj("../lesson1/1-triangle.obj")
-  # mesh = load_obj("../lesson1/2-quad.obj")
-  # mesh = load_obj("../lesson1/3-quad.obj", "../lesson1/dirt.png")
-  # mesh = load_obj("../lesson1/4-quad.obj", "../lesson1/dirt.png")
-  # mesh = load_obj("../lesson1/5-edge.obj", "../lesson1/grass.png")
-  # mesh = load_obj("../lesson1/6-cube.obj", "../lesson1/grass.png")
+  mesh = load_obj("../lesson1/1_triangle.obj")
+  # mesh = load_obj("../lesson1/2_quad.obj")
+  # mesh = load_obj("../lesson1/3_quad.obj", "../lesson1/dirt.png")
+  # mesh = load_obj("../lesson1/4_quad.obj", "../lesson1/dirt.png")
+  # mesh = load_obj("../lesson1/5_edge.obj", "../lesson1/grass.png")
+  # mesh = load_obj("../lesson1/6_cube.obj", "../lesson1/grass.png")
 
   # save obj
   o3d.io.write_triangle_mesh("./output/output.obj", mesh)
