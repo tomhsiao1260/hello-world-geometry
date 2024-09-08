@@ -58,20 +58,24 @@ def rotate(mesh, theta=0, axis='x'):
 
   mesh.vertices = o3d.utility.Vector3dVector(vertices)
 
-# merge 2 meshes into 1
-def combine(meshA, meshB, share_texture=False):
-  mesh = meshA + meshB
+# merge meshes into 1
+def combine(meshes, share_texture=False):
+  ref_mesh = meshes[0]
+  combine_mesh = copy.deepcopy(ref_mesh)
+
+  # combine
+  for mesh in meshes[1:]: combine_mesh += mesh
 
   if share_texture:
     # share textures
-    mesh.textures = meshA.textures
+    combine_mesh.textures = ref_mesh.textures
     # share material ids
-    ids = meshA.triangle_material_ids
-    ids = np.repeat(np.asarray(ids), 2)
+    ids = ref_mesh.triangle_material_ids
+    ids = np.tile(np.asarray(ids), len(meshes))
     ids = o3d.utility.IntVector(ids)
-    mesh.triangle_material_ids = ids
+    combine_mesh.triangle_material_ids = ids
 
-  return mesh
+  return combine_mesh
 
 # update normals
 def compute_normals(mesh):
@@ -95,7 +99,7 @@ if __name__ == "__main__":
   rotate(meshA, np.pi/4, 'x')
   rotate(meshB, np.pi/4, 'z')
 
-  mesh = combine(meshA, meshB, True)
+  mesh = combine([meshA, meshB], True)
   compute_normals(mesh)
 
   # save obj
